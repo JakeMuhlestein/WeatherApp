@@ -12,7 +12,7 @@ const app = express()
 var apiKey = 'c10aa5c735891861ff883743b62e8fea';
 
 //set port
-app.set('views', path.join(__dirname, 'views'))
+//app.set('views', path.join(__dirname, 'views'))
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
