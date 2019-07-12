@@ -12,6 +12,7 @@ const app = express()
 var apiKey = 'c10aa5c735891861ff883743b62e8fea';
 
 //set port
+app.use( express.static( "public" ) );
 //app.set('views', path.join(__dirname, 'views'))
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,7 +43,13 @@ app.post('/', function (req, res) {
         	res.render('index', {weather: null, error: 'Error, please try again'});
       	} else {
         	var weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-        	res.render('index', {weather: weatherText, error: null});
+          var loc = weather.name;
+          var curTemp = weather.main.temp;
+          var clouds = weather.clouds.all;
+          var windSpeed = weather.wind.speed;
+          var time = weather.dt;
+        	res.render('index', {weather: weatherText, windSpeed: windSpeed,  
+          curTemp: curTemp, clouds: clouds, loc: loc, time: time, error: null});
       	}
     }
   });

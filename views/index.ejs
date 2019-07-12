@@ -2,23 +2,85 @@
 <html>
 
 <head>
-    <title>Today's Forecast</title>
+    <title>Current Weather</title>
+    <!--https://blog.fps.hu/274-vector-line-icons-for-free/-->
+    <style>
+        td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+        }
+        body {
+            background-color: snow;
+        }
+        div {
+            border: 1px solid red; 
+            padding: 35px;
+            width: 33%;
+            text-align: center;
+            background-color: Khaki;
+        }
+        table {
+            margin: auto;
+        }
+    </style>
+
 </head>
 
 <body>
-    <h1>Simple Forecast</h1>
+    <div>
+    <h1>Current Weather App</h1>   
     <form action="/" method="post">
-        Location<input type="text" name="city"><br>
+        Location <input type="text" name="city">
         <button type="submit">Submit</button>
     </form>
-        <% if(weather !== null){ %>
-          <p><%= weather %></p>
-        <% } %>
+        <br>
 
+        <% if(weather !== null){ %>
+
+        <table bgcolor="SteelBlue">
+            <tr>
+                <th><%= loc %></th>
+            </tr>
+            <tr>
+                <td>
+                    <% if(((time % (24 * 60 * 60)) < 46800) && ((time % (24 * 60 * 60)) > 3600)) { %>
+                        <% if(clouds > 75) { %>
+                            <img src="/images/cloud.svg" alt="cloudy"><br>
+                        <% } else if (clouds > 50) { %>
+                            <img src="/images/moonCloud.svg" alt="mostly cloudy"><br>
+                        <% } else if (clouds > 25) { %>
+                            <img src="/images/moonPartCloud.svg" alt="partly cloudy"><br>
+                        <% } else if (clouds > 0) { %>
+                            <img src="/images/moon.svg" alt="sunny"><br>
+                        <% } %>
+                    <% } else { %>
+                        <% if(clouds > 75) { %>
+                            <img src="/images/cloud.svg" alt="cloudy"><br>
+                        <% } else if (clouds > 50) { %>
+                            <img src="/images/sunCloud.svg" alt="mostly cloudy"><br>
+                        <% } else if (clouds > 25) { %>
+                            <img src="/images/partCloud.svg" alt="partly cloudy"><br>
+                        <% } else if (clouds > 0) { %>
+                            <img src="/images/sunny.svg" alt="sunny"><br>
+                        <% } %>
+                        
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td>Temp: <%= curTemp %> &degF</td>
+            </tr>
+            <tr>
+                <td>Wind: <%= windSpeed %> mph</td>
+            </tr>
+        </table>
+        </div>
+        <% } %>
         <% if(error !== null){ %>
           <p><%= error %></p>
         <% } %>
-
+    
 </body>
 
 </html>
